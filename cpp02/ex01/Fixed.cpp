@@ -31,7 +31,7 @@ Fixed::Fixed(const float f_i)
 
 Fixed &Fixed::operator=(const Fixed &c_asg)
 {
-	std::cout << "Copy assigment operator called" << std::endl;
+	std::cout << "Copy assignment operator called" << std::endl;
 	this->_value = c_asg._value;
 	return (*this);
 }
