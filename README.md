@@ -1,1 +1,2 @@
-# Cpp-42
+# Cpp-Modules
+C++ memory allocation, reference, pointers to members and use of switch in CPP, Ad-hoc polymorphism, overloads and orthodox canonical classes, inheritance, subtype polymorphism, abstract classes and interfaces, try/catch and Exceptions, different casts, templates, templated containers, iterators and algorithms, the containers is a project that I developed in 10 different modules to understand the topics.
