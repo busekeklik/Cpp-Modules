@@ -49,7 +49,7 @@ class Array
 
 		T &operator[](unsigned int i)
 		{
-			if (i >= _size)
+			if (i >= _size || i < 0)
 		        throw std::out_of_range("Index is out of bounds!");
 	        else
 	           return array[i];
