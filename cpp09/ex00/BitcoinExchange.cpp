@@ -4,7 +4,7 @@ BitcoinExchange::BitcoinExchange()
 {
 }
 
-~BitcoinExchange::BitcoinExchange()
+BitcoinExchange::~BitcoinExchange()
 {
 }
 
