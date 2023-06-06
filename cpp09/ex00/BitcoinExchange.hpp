@@ -6,11 +6,14 @@
 
 class BitcoinExchange{
     public:
+        std::string fileName;
+
         BitcoinExchange();
         ~BitcoinExchange();
         BitcoinExchange(const BitcoinExchange &copy);
         BitcoinExchange &operator =(const BitcoinExchange &other);
-        
+
+        void takeValue();
 };
 
 #endif
