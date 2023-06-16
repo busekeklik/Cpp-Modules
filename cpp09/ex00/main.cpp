@@ -8,7 +8,9 @@ int main(int ac, char **av)
     {
         BitcoinExchange btc;
         btc.fileName = av[1];
-        btc.takeValue();
+        btc.dataCSV = "data.csv";
+        btc.reachDataValues();
+        btc.reachIndexValues();
     }
     return (0);
 }
