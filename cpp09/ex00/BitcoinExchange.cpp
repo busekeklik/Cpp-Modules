@@ -6,6 +6,7 @@ BitcoinExchange::BitcoinExchange()
 
 BitcoinExchange::~BitcoinExchange()
 {
+    this->map.clear();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy)
@@ -15,6 +16,14 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy)
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &copy)
 {
+    this->map.clear();
+    std::map < t_date, float>::iterator its = copy.map.begin();
+    std::map < t_date, float>::iterator ite = copy.map.end();
+    while(it != ite)
+    {
+        this->map.insert(*its);
+        its++;
+    }
     this->day = copy.day;
     this->year = copy.year;
     this->month = copy.month;
@@ -29,7 +38,7 @@ bool BitcoinExchange::checkDate(void)
 {
     bool acceptableDate = false;
     if(date.length() != 10)
-        std::cerr << "invalid" << std::endl;
+        throw ("Invalid date");
     this->year = std::stoi(date.substr(0,4));
     this->month = std::stoi(date.substr(5,7));
     this->day = std::stoi(date.substr(8,10));
@@ -71,6 +80,9 @@ bool BitcoinExchange::checkValue()
 void BitcoinExchange::parseAndCheckContents2(std::string line)
 {
     size_t a = line.find("|");
+
+    if (a == line.length() -1)
+        throw("invalid date");
     size_t i, j;
     this->date.resize(a);
     for(i = 0; i <= a; i++)
@@ -89,7 +101,7 @@ void BitcoinExchange::parseAndCheckContents2(std::string line)
         value[j] = line[i];
         i++;
     }    
-    valuef2 = std::stof(value2);
+   
 }
 
 void BitcoinExchange::parseAndCheckContents1(std::string line)
@@ -109,6 +121,7 @@ void BitcoinExchange::parseAndCheckContents1(std::string line)
         value2[j] = line[i];
         i++;
     }
+     valuef2 = std::stof(value2);
 }
 
 void BitcoinExchange::reachDataValues()
@@ -128,7 +141,7 @@ void BitcoinExchange::reachDataValues()
 	        }
             parseAndCheckContents1(line);
             std::pair<std::string, float> pair;
-            pair = std::pair<std::string, float> (date, valuef);
+            pair = std::pair<std::string, float> (date2, valuef2);
             this->map.insert(pair);
         }
     }
@@ -157,17 +170,12 @@ void BitcoinExchange::reachIndexValues()
                 return ;
 	        }
             parseAndCheckContents2(line);
+
              if(!checkDate() || ! checkValue())
                 return ;
             std::pair<std::string, float> pair;
             pair = std::pair<std::string, float> (date, valuef);
-            std::map<std::string, float>::iterator it = this->map.find(pair.first);
-            //std::cout << pair.first << std::endl;
-            //std::cout << pair.second << std::endl;
-
-
-            //std::cout << it->first << std::endl;
-            //std::cout << it->second << std::endl;
+            std::map<std::string, float>::iterator it =  this->map.find(pair.first);
 
 			if (it != this->map.end())
 				std::cout << line.substr(0, line.find("|")) << "=> " << pair.second << " = " << pair.second * it->second << std::endl;
