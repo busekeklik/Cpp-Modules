@@ -5,6 +5,7 @@
 #include <fstream>
 #include <map>
 #include <string>
+#include <sstream>
 class BitcoinExchange{
     private:
       std::map<std::string, float> map;
@@ -17,9 +18,6 @@ class BitcoinExchange{
     public:
         std::string dataCSV;
         std::string fileName;
-        int month;
-        int year;
-        int day;
 
         BitcoinExchange();
         ~BitcoinExchange();
@@ -28,7 +26,7 @@ class BitcoinExchange{
 
         void reachDataValues();
         void reachIndexValues();
-        void parseAndCheckContents1(std::string line);
+        void parseContents(std::string line);
         void parseAndCheckContents2(std::string line);
         bool checkDate();
         bool checkValue();

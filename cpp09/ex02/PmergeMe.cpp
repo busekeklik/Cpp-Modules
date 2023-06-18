@@ -72,7 +72,7 @@ void PmergeMe::sort(char **str)
     std::cout << "Before :";
 	printVector();
 	start = clock();
-    merge_sort(vector_, 0, vector_.size() - 1);
+    merge_sort(vectorn, 0, vector_.size() - 1);
 	end = clock();
 	startTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 
@@ -84,6 +84,6 @@ void PmergeMe::sort(char **str)
 	printVector();
 	//printDeque();
 	std::cout << std::fixed << std::setprecision(3);
-	std::cout << "Time to process a range of "<< vector_.size() <<  " elements with std::vector : " << startTime << " ms\n";
-	std::cout << "Time to process a range of "<< deque_.size() <<  " elements with std::list : " << finishTime << " ms\n";
+	std::cout << "Time to process a range of "<< vectorn.size() <<  " elements with std::vector : " << startTime << " ms\n";
+	std::cout << "Time to process a range of "<< dequen.size() <<  " elements with std::list : " << finishTime << " ms\n";
 }

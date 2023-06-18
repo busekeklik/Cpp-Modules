@@ -1,5 +1,5 @@
 #ifndef PMERGME_HPP
-# define PMERGE_HPP
+# define PMERGME_HPP
 
 #include <vector>
 #include <deque>
@@ -20,5 +20,5 @@ class PmergeMe
     void printVector();
     void sort(char **str);
 
-}
+};
 #endif

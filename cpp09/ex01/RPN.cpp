@@ -52,9 +52,9 @@ void RPN::fourTransactions(std::string line)
         }
         else if (charExistsInString(this->operators, c) && (stack.size() >= 2))
         {
-            int nb1 = stack.top();
-            stack.pop();
             int nb2 = stack.top();
+            stack.pop();
+            int nb1 = stack.top();
             stack.pop();
             switch (c)
             {
