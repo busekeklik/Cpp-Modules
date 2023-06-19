@@ -23,12 +23,12 @@ class PmergeMe
     
     void sort(char **str);
 
-template< typename T >
+	template< typename T >
 	void	MergeSort(T & lst, int beg, int end) {
 		int mid;
-		if (beg<end)  
+		if (beg < end)  
 		{
-			mid = (beg+end)/2;  
+			mid = (beg + end)/2;  
 			MergeSort(lst, beg, mid);  
 			MergeSort(lst, mid+1, end);  
 			merge(lst, beg, mid, end);  
