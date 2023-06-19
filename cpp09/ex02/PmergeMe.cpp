@@ -11,21 +11,27 @@ PmergeMe::PmergeMe(const PmergeMe & origin)
 
 PmergeMe & PmergeMe::operator=(const PmergeMe & th)
 {
-	this->vector_ = th.vectorn;
-	this->deque_ = th.dequen;
+	this->vectorn = th.vectorn;
+	this->dequen = th.dequen;
 	return *this;
 }
 
-void PmergeMe::numbersCheck(char *str)
+void PmergeMe::numbersCheck(char *s)
 {
-
+	std::string str = s;
+	if (str[0] == '-')
+		throw "Error: not a positive number.";
+	if (str.length() > 10 || (str.length() == 10 && str > "2147483647"))
+		throw "Error: too large a number.";
+	if (!str.empty() && str.find_first_not_of("0123456789") != std::string::npos)
+		throw "Error: not a number.";
 }
 
 
 void PmergeMe::printVector()
 {
     int i = 0;
-	for (std::vector<int>::iterator it = vector_.begin(); it < vector_.end(); it++)
+	for (std::vector<int>::iterator it = vectorn.begin(); it < vectorn.end(); it++)
 	{
 		if(i >= 8)
 		{
@@ -37,6 +43,7 @@ void PmergeMe::printVector()
 	}
 	std::cout << std::endl;
 }
+
 
 void PmergeMe::printDeque()
 {
@@ -54,6 +61,7 @@ void PmergeMe::printDeque()
 	std::cout << std::endl;
 }
 
+
 void PmergeMe::sort(char **str)
 {
     std::clock_t start, end;
@@ -64,7 +72,7 @@ void PmergeMe::sort(char **str)
     while (str[i])
 	{
 		numbersCheck(str[i]);
-		nb = stoi(str[i]);
+		nb = std::stoi(str[i]);
 		vectorn.push_back(nb);
 		dequen.push_back(nb);
 		i++;
@@ -72,18 +80,18 @@ void PmergeMe::sort(char **str)
     std::cout << "Before :";
 	printVector();
 	start = clock();
-    merge_sort(vectorn, 0, vector_.size() - 1);
+    MergeSort(vectorn, 0, vectorn.size() - 1);
 	end = clock();
 	startTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 
     start = clock();
-	merge_sort(dequen, 0, vector_.size() - 1);
+	MergeSort(dequen, 0, vectorn.size() - 1);
 	end = clock();
 	finishTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 	std::cout << "After :";
 	printVector();
 	//printDeque();
 	std::cout << std::fixed << std::setprecision(3);
-	std::cout << "Time to process a range of "<< vectorn.size() <<  " elements with std::vector : " << startTime << " ms\n";
-	std::cout << "Time to process a range of "<< dequen.size() <<  " elements with std::list : " << finishTime << " ms\n";
+	std::cout << "Time to process a range of "<< vectorn.size() <<  " elements with std::vector : " << startTime << " us" << std::endl;
+	std::cout << "Time to process a range of "<< dequen.size() <<  " elements with std::list : " << finishTime << " us" << std::endl;
 }
