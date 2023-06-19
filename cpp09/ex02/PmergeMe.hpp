@@ -22,47 +22,6 @@ class PmergeMe
     void numbersCheck(char *s);
     
     void sort(char **str);
-// template <typename Container>
-
-// void MergeSort(Container& container, typename Container::iterator left, typename Container::iterator right);
-// void Merge(Container& container, typename Container::iterator left, typename Container::iterator mid, typename Container::iterator right) {
-// template <typename T>
-// void Merge(T& container, typename T::iterator left, typename T::iterator mid, typename T::iterator right) {
-//     T merged;
-//     typename T::iterator it1 = left;
-//     typename T::iterator it2 = mid;
-    
-//     while (it1 != mid && it2 != right) {
-//         if (*it1 <= *it2) {
-//             merged.push_back(*it1);
-//             ++it1;
-//         } else {
-//             merged.push_back(*it2);
-//             ++it2;
-//         }
-//     }
-    
-//     merged.insert(merged.end(), it1, mid);
-//     merged.insert(merged.end(), it2, right);
-    
-//     typename T::iterator mergedIt = merged.begin();
-//     typename T::iterator containerIt = left;
-//     while (mergedIt != merged.end() && containerIt != right) {
-//         *containerIt = *mergedIt;
-//         ++mergedIt;
-//         ++containerIt;
-//     }
-// }
-
-// template <typename T>
-// void MergeSort(T& container, typename T::iterator left, typename T::iterator right) {
-//     if (right - left > 1) {
-//         typename Container::iterator mid = left + (right - left) / 2;
-//         MergeSort(container, left, mid);
-//         MergeSort(container, mid, right);
-//         Merge(container, left, mid, right);
-//     }
-// }
 
 template< typename T >
 	void	MergeSort(T & lst, int beg, int end) {
@@ -99,4 +58,5 @@ template< typename T >
 		}
 	}
 };
+
 #endif

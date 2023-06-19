@@ -6,7 +6,7 @@ BitcoinExchange::BitcoinExchange()
 
 BitcoinExchange::~BitcoinExchange()
 {
-    this->map.clear();
+    this->coin.clear();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy)
@@ -18,16 +18,14 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &copy)
 {
 
     std::map<std::string, float>::const_iterator it;
-    for (it = copy.map.begin(); it != copy.map.end(); ++it)   
+    for (it = copy.coin.begin(); it != copy.coin.end(); ++it)   
     {
         std::pair<std::string, float> pair;
         pair = std::pair<std::string, float> (it->first, it->second);            
-        this->map.insert(pair);
+        this->coin.insert(pair);
     }
-
     this->dataCSV = copy.dataCSV;
     this->fileName = copy.fileName;
-    this->map = copy.map;
     this->valuef2 = copy.valuef2;
     this->valuef = copy.valuef;
     this->date2 = copy.date2;
@@ -84,7 +82,7 @@ void BitcoinExchange::parseAndCheckContents2(std::string line)
 
     if (a == line.length() - 1)
     {
-        std::cout << "invalid" << std::endl;
+        std::cerr << "Error: bad input => " + line << std::endl;
         return ;
     }
     size_t i, j;
@@ -121,8 +119,7 @@ void BitcoinExchange::parseContents(std::string line)
         value2[j] = line[i];
         i++;
     }
-    std::stringstream ss(value2);
-    ss >> valuef2;
+    valuef2 = std::stof(value2);
 }
 
 void BitcoinExchange::reachDataValues()
@@ -138,7 +135,7 @@ void BitcoinExchange::reachDataValues()
             parseContents(line);
             std::pair<std::string, float> pair;
             pair = std::pair<std::string, float> (date2, valuef2);            
-            this->map.insert(pair);
+            this->coin.insert(pair);
         }
     }
     else
@@ -170,10 +167,9 @@ void BitcoinExchange::reachIndexValues()
             pair = std::pair<std::string, float> (date, valuef);
 
             std::map<std::string, float>::iterator it;
-            for (it = map.begin(); it != map.end(); ++it) {
+            for (it = coin.begin(); it != coin.end(); ++it) {
                 if (it->first == pair.first)
                 {
-
                     std::cout << line.substr(0, line.find("|")) << "=> " << pair.second << " = " << pair.second * it->second  <<  std::endl;
                     break;
                 }

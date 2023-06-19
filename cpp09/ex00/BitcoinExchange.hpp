@@ -8,7 +8,7 @@
 #include <sstream>
 class BitcoinExchange{
     private:
-      std::map<std::string, float> map;
+      std::map<std::string, float> coin;
       std::string date;
       std::string value;
       std::string date2;

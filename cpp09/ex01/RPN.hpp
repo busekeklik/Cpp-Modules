@@ -7,7 +7,7 @@
 class RPN
 {
     private:
-        std::stack<int>stack;
+        std::stack<int>st;
     public:
         std::string line;
         std::string acceptableValue;

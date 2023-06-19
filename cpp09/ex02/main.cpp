@@ -11,7 +11,7 @@ int main(int ac, char **av)
 	}
  	catch(const char *str)
  	{
- 		std::cerr << str << '\n';
+ 		std::cerr << str << std::endl;
  	}
 
 }

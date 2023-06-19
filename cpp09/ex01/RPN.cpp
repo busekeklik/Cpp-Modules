@@ -6,7 +6,6 @@ RPN::RPN(){
 }
 
 RPN::~RPN(){
-
 }
 
 RPN::RPN(const RPN &copy)
@@ -16,7 +15,7 @@ RPN::RPN(const RPN &copy)
 
 RPN &RPN::operator=(const RPN &rpn)
 {
-	this->stack = rpn.stack;
+	this->st = rpn.st;
     this->line = rpn.line;
     this->acceptableValue = rpn.acceptableValue;
     this->operators = rpn.operators;
@@ -30,7 +29,6 @@ bool RPN::charExistsInString(const std::string& str, char ch)
 
 void RPN::fourTransactions(std::string line)
 {
-   
     for (size_t i = 0; i < line.length(); i++)
 	{
 		size_t index = this->acceptableValue.find(line[i]);
@@ -48,35 +46,35 @@ void RPN::fourTransactions(std::string line)
         if (isdigit(c))
         {
             int nb = c - '0';
-            stack.push(nb);
+            st.push(nb);
         }
-        else if (charExistsInString(this->operators, c) && (stack.size() >= 2))
+        else if (charExistsInString(this->operators, c) && (st.size() >= 2))
         {
-            int nb2 = stack.top();
-            stack.pop();
-            int nb1 = stack.top();
-            stack.pop();
+            int nb2 = st.top();
+            st.pop();
+            int nb1 = st.top();
+            st.pop();
             switch (c)
             {
             case '+':
-                stack.push(nb1 + nb2);
+                st.push(nb1 + nb2);
                 break;
             case '-':
-                stack.push(nb1 - nb2);
+                st.push(nb1 - nb2);
                 break;
             case '*':
-                stack.push(nb1 * nb2);
+                st.push(nb1 * nb2);
                 break;
             case '/':
-                stack.push(nb1 / nb2);
+                st.push(nb1 / nb2);
                 break;
             }
         }
     } 
-    if (stack.size() == 1)
+    if (st.size() == 1)
 	{
-		int result = stack.top();
-		stack.pop();
+		int result = st.top();
+		st.pop();
 		std::cout << "Result: " << result << std::endl;
 	}
 }
