@@ -27,6 +27,17 @@ bool RPN::charExistsInString(const std::string& str, char ch)
     return str.find(ch) != std::string::npos;
 }
 
+std::string RPN::removeSpaces(std::string str) 
+{
+    std::string result;
+    for (size_t i = 0; i < str.length(); i++) {
+        if (str[i] != ' ') {
+            result += str[i];
+        }
+    }
+    return result;
+}
+
 void RPN::fourTransactions(std::string line)
 {
     for (size_t i = 0; i < line.length(); i++)
@@ -38,7 +49,7 @@ void RPN::fourTransactions(std::string line)
             exit(1);
         }
 	}
-    line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
+    line = removeSpaces(line);
 
     for (size_t i = 0; i < line.length(); i++)
     {
@@ -68,13 +79,13 @@ void RPN::fourTransactions(std::string line)
             case '/':
                 st.push(nb1 / nb2);
                 break;
-            }
+            }            
         }
     } 
     if (st.size() == 1)
 	{
 		int result = st.top();
 		st.pop();
-		std::cout << "Result: " << result << std::endl;
+		std::cout << result << std::endl;
 	}
 }

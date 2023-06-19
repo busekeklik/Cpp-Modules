@@ -20,5 +20,6 @@ class RPN
 
         void fourTransactions(std::string line);
         bool charExistsInString(const std::string& str, char ch);
+        std::string removeSpaces(std::string str);
 };
 #endif
