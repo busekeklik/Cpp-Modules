@@ -76,6 +76,17 @@ bool BitcoinExchange::checkValue()
     return acceptableValue;
 }
 
+std::string BitcoinExchange::removeSpaces(std::string str) 
+{
+    std::string result;
+    for (size_t i = 0; i < str.length(); i++) {
+        if (str[i] != ' ') {
+            result += str[i];
+        }
+    }
+    return result;
+}
+
 void BitcoinExchange::parseAndCheckContents2(std::string line)
 {
     size_t a = line.find("|");
@@ -86,7 +97,7 @@ void BitcoinExchange::parseAndCheckContents2(std::string line)
         return ;
     }
     size_t i, j;
-    line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
+    line = removeSpaces(line);
     this->date.resize(a);
     for(i = 0; i <= a - 1; i++)
     {
@@ -113,7 +124,7 @@ void BitcoinExchange::parseContents(std::string line)
             this->date2[i] = line[i];
     }
     a = line.length() - a;
-    this->value2.resize(a-1);
+    this->value2.resize(a - 1);
     for(j = 0; i < line.length(); j++)
     {
         value2[j] = line[i];
@@ -161,7 +172,7 @@ void BitcoinExchange::reachIndexValues()
                 continue;
             }
             parseAndCheckContents2(line);
-            if(!checkDate() || ! checkValue())
+            if(!checkDate() || !checkValue())
                 continue;
             std::pair<std::string, float> pair;
             pair = std::pair<std::string, float> (date, valuef);

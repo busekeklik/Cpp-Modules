@@ -24,6 +24,7 @@ class BitcoinExchange{
         BitcoinExchange(const BitcoinExchange &copy);
         BitcoinExchange &operator =(const BitcoinExchange &other);
 
+        std::string removeSpaces(std::string str);
         void reachDataValues();
         void reachIndexValues();
         void parseContents(std::string line);

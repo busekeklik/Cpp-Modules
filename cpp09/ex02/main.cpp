@@ -13,5 +13,4 @@ int main(int ac, char **av)
  	{
  		std::cerr << str << std::endl;
  	}
-
 }
